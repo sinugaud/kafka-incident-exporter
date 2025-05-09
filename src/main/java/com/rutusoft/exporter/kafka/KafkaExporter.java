@@ -30,8 +30,8 @@ public class KafkaExporter implements Exporter {
 
         // Hardcoded Kafka config
         String brokers = "host.docker.internal:9092";
-        topic = "ims-task";
-        processFilter = "process_incident_management";
+        topic = "task";
+        processFilter = "process_test";
 
         // Kafka producer properties
         Properties props = new Properties();
