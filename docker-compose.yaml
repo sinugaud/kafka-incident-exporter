@@ -1,19 +1,19 @@
 version: '3.3'
 
 services:
-  zeebe_data:
+  zeebe_exporter:
     image: ${ZEEBE_IMAGE:-camunda/zeebe}:latest
     container_name: zeebe_data
     ports:
-      - "26500:26500"
+      - "26501:26500"
       - "8999:8080"
-      - "9600:9600"
+      - "9601:9600"
     restart: always
     environment:
       SPRING_CONFIG_ADDITIONAL_LOCATION: /usr/local/zeebe/config/exporter.yml
     volumes:
       - ./exporter.yml:/usr/local/zeebe/config/exporter.yml
-      - D:\zeebe-camunda\kafka-ims-exporter\target\incident-kafka-exporter.jar:/usr/local/zeebe/exporters/zeebe-kafka-exporter.jar
+      - ./target\incident-kafka-exporter.jar:/usr/local/zeebe/exporters/zeebe-kafka-exporter.jar
 #  consumer:
 #    image: edenhill/kafkacat:${KAFKACAT_VERSION:-1.5.0}
 #    container_name: consumer

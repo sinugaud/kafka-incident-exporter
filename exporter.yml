@@ -2,6 +2,5 @@ zeebe:
   broker:
     exporters:
       kafka:
-        exporter:
-          className: com.rutusoft.exporter.kafka.KafkaExporter
+          className: com.example.exporter.kafka.KafkaExporter
           jarPath:  /usr/local/zeebe/exporters/zeebe-kafka-exporter.jar

@@ -1,4 +1,4 @@
-package com.rutusoft.exporter.kafka;
+package com.example.exporter.kafka;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -28,12 +28,10 @@ public class KafkaExporter implements Exporter {
     public void configure(Context context) throws Exception {
         Exporter.super.configure(context);
 
-        // Hardcoded Kafka config
         String brokers = "host.docker.internal:9092";
         topic = "task";
         processFilter = "process_test";
 
-        // Kafka producer properties
         Properties props = new Properties();
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, brokers);
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
