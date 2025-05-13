@@ -1,0 +1,61 @@
+Here’s your revised post, polished for clarity, grammar, and professionalism—with the update about the lightweight vs fat JAR situation included:
+
+---
+
+I'm trying to configure a custom Kafka exporter in my Zeebe broker using the following YAML:
+
+```yaml
+zeebe:
+  broker:
+    exporters:
+      KafkaExporter:
+        className: com.example.exporter.kafka.KafkaExporter
+        jarPath: /usr/local/zeebe/exporters/zeebe-kafka-exporter.jar
+```
+
+However, I'm encountering the following exception during broker startup:
+
+```
+Caused by: io.camunda.zeebe.broker.exporter.repo.ExporterLoadException: Cannot load exporter [KafkaExporter]: cannot load specified class
+Caused by: java.lang.ClassCastException: class com.example.exporter.kafka.KafkaExporter
+```
+
+I also tried renaming the exporter entry to a more generic name like `kafka`:
+
+```yaml
+zeebe:
+  broker:
+    exporters:
+      kafka:
+        className: com.example.exporter.kafka.KafkaExporter
+        jarPath: /usr/local/zeebe/exporters/zeebe-kafka-exporter.jar
+```
+
+But I still get the same error:
+
+```
+Caused by: io.camunda.zeebe.broker.exporter.repo.ExporterLoadException: Cannot load exporter [kafka]: cannot load specified class
+Caused by: java.lang.ClassCastException: class com.example.exporter.kafka.KafkaExporter
+```
+
+---
+
+Here's what I’ve observed:
+
+✅ If I package the exporter as a **lightweight JAR** (without dependencies), it works fine.
+
+❌ But when I build a **fat JAR** (including all dependencies), the Zeebe broker throws a `ClassCastException` for the exporter class.
+
+---
+
+### What I Need Help With:
+
+* How can I correctly build a fat JAR for a Zeebe exporter with dependencies?
+* Is there a known issue with class loading or shading in fat JARs for custom exporters?
+* Can someone confirm what the `className` should be and how the exporter name in YAML is interpreted?
+
+Any help or guidance would be greatly appreciated. Thank you!
+
+---
+
+Would you like me to give you a sample `pom.xml` or `build.gradle` to generate a correct fat JAR for this use case?

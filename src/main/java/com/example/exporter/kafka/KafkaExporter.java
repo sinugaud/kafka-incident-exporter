@@ -66,12 +66,12 @@ public class KafkaExporter implements Exporter {
 
     @Override
     public void export(Record<?> record) {
-        logger.info("record : {}", record);
+//        logger.info("record : {}", record);
         try {
             if (record.getValueType() != ValueType.USER_TASK) {
                 return;
             }
-            logger.info(" filter usertask  : {}", record.getRecordType());
+            logger.info(" filter user task  : {}", record.getRecordType());
 
             final String json = record.toJson();
             final JsonNode valueNode = objectMapper.readTree(json).path("value");
